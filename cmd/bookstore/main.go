@@ -8,5 +8,6 @@ import (
 
 func main() {
 	log.Println("Hello World!")
-	db.Setup()
+	postgres_db := db.Setup()
+	db.CreateTables(postgres_db)
 }

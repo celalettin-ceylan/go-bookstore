@@ -12,7 +12,7 @@ import (
 
 var DB *gorm.DB
 
-func Setup() {
+func Setup() *gorm.DB {
 
 	utils.ReadEnvFile()
 
@@ -32,4 +32,5 @@ func Setup() {
 	}
 
 	log.Println("Database connected successfuly")
+	return DB
 }
