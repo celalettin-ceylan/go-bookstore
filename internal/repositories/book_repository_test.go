@@ -36,9 +36,9 @@ func connectDatabase() *gorm.DB {
 
 func TestCreateBook(t *testing.T) {
 	book := models.Book{
-		Title:    "Kuzey Expressinde Cinayet",
+		Title:    "Dogu Expressinde Cinayet2",
 		Author:   "Agathe Cristhine",
-		Price:    50,
+		Price:    52,
 		Quantity: 100,
 	}
 
@@ -81,4 +81,13 @@ func TestUpdateBook(t *testing.T) {
 		fmt.Print("Can not update book record")
 	}
 	fmt.Print(updatedBook)
+}
+
+func TestDeleteBook(t *testing.T) {
+	DB := connectDatabase()
+	err := NewBookRepository(DB).DeleteBook(1)
+	if err != nil {
+		fmt.Printf("Can not delete book")
+	}
+	fmt.Printf("Deleted successfully book")
 }
