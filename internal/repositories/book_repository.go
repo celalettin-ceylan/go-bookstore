@@ -48,7 +48,7 @@ func (r *BookRepository) UpdateBook(book *models.Book) (*models.Book, error) {
 }
 
 func (r *BookRepository) DeleteBook(id uint) error {
-	if err := r.DB.Delete(models.Book{}, id).Error; err != nil {
+	if err := r.DB.Delete(&models.Book{}, id).Error; err != nil {
 		return err
 	}
 	return nil
