@@ -7,11 +7,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var router *mux.Router
+var router = mux.NewRouter()
 
 func SetupBookRoutes() *mux.Router {
-
-	router = mux.NewRouter()
 
 	bookRepository := repositories.NewBookRepository(db.DB)
 	bookController := controllers.NewBookController(bookRepository)
