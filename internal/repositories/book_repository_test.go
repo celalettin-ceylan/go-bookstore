@@ -11,14 +11,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// type Book struct {
-// 	ID       uint    `gorm:"primaryKey"`
-// 	Title    string  `gorm:"size:255;not null"`
-// 	Author   string  `gorm:"size:255;not null"`
-// 	Price    float64 `gorm:"not null"`
-// 	Quantity int     `gorm:"not null"`
-// }
-
 var dsn = "host=localhost user=cc password=12345 dbname=gobookstore_test port=5432 sslmode=disable"
 
 func connectDatabase() *gorm.DB {
@@ -30,16 +22,17 @@ func connectDatabase() *gorm.DB {
 		log.Fatalf("Could not connect to the database: %v", err)
 	}
 
-	db.CreateBookTablesIfNotExist(DB)
+	db.CreateTables(DB)
 	return DB
 }
 
 func TestCreateBook(t *testing.T) {
 	book := models.Book{
-		Title:    "Dogu Expressinde Cinayet2",
-		Author:   "Agathe Cristhine",
-		Price:    52,
-		Quantity: 100,
+		Model:    gorm.Model{},
+		AuthorID: 2,
+		Author:   models.Author{Gender: "Female", Name: "Merve CEYLAN"},
+		Title:    "Bati Expressinde Cinayet2",
+		Price:    50,
 	}
 
 	DB := connectDatabase()
@@ -68,11 +61,11 @@ func TestGetBookById(t *testing.T) {
 
 func TestUpdateBook(t *testing.T) {
 	book := models.Book{
-		ID:       2,
+		Model:    gorm.Model{ID: 1},
 		Title:    "Kuzey Expressinde Cinayet",
-		Author:   "Agathe Cristhine",
-		Price:    35,
-		Quantity: 100,
+		AuthorID: 1,
+		Author:   models.Author{Model: gorm.Model{ID: 1}, Gender: "Male", Name: "Celalettin ISLAM"},
+		Price:    40,
 	}
 
 	DB := connectDatabase()

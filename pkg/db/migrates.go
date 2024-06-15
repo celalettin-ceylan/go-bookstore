@@ -11,5 +11,5 @@ func CreateBookTablesIfNotExist(db *gorm.DB) {
 
 func CreateTables(db *gorm.DB) {
 	db.AutoMigrate(&models.Book{})
-	// other models
+	db.AutoMigrate(&models.Author{})
 }
